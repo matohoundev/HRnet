@@ -1,0 +1,20 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.925rem 1.95rem;
+  h1 {
+    color: black;
+  }
+  .box-link {
+    display: flex;
+    column-gap: 5rem;
+    a {
+      color: #004be2;
+      font-size: 1.15rem;
+      &:hover {
+        color: #0b3c9c;
+      }
+    }
+  }
+}
