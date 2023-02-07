@@ -1,25 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const EmployeeList = () => {
-  const [employees, setEmployees] = useState([
-    {
-      id: 1,
-      firstName: "John",
-      lastName: "Doe",
-      startDate: "01/01/2020",
-      department: "Sales",
-      dateOfBirth: "01/01/1990",
-      street: "123 Main St",
-      city: "New York",
-      state: "NY",
-      zipCode: "10001",
-    },
-  ]);
-
-  useEffect(() => {
-    // setEmployees(JSON.parse(localStorage.getItem("employees")));
-    setEmployees(employees);
-  }, [employees]);
+  const employees = useSelector((state) => state.employees.employees);
 
   return (
     <div id="employee-div" className="container">
@@ -39,8 +22,8 @@ const EmployeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
-            <tr key={employee.id}>
+          {employees.map((employee, index) => (
+            <tr key={index}>
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.startDate}</td>
