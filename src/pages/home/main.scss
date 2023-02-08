@@ -18,9 +18,23 @@ input {
   border: 2px solid black;
 }
 
-select {
+.select {
+  margin-top: -10px;
   width: 100%;
-  border: 2px solid black;
+  min-width: 180px;
+  > div {
+    // border: 2px solid black;
+    min-height: fit-content;
+    border-radius: 0;
+    &:hover {
+      // border: 2px solid black;
+      box-shadow: none;
+    }
+    &:focus {
+      // border: 2px solid black;
+      box-shadow: none;
+    }
+  }
 }
 
 .btnSubmit {

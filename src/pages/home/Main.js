@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { states } from "../../data/states";
 import { addEmployee } from "../../redux/actions/employeeActions";
+import Select from "react-select";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,27 @@ const Main = () => {
   const [state, setState] = useState(states[0].name);
   const [zipCode, setZipCode] = useState("");
   const [department, setDepartment] = useState("Sales");
+  const optionsForStates = states.map((state) => ({
+    value: state.name,
+    label: state.name,
+  }));
+  const optionsForDepartment = [
+    { value: "Sales", label: "Sales" },
+    { value: "Marketing", label: "Marketing" },
+    { value: "Engineering", label: "Engineering" },
+    { value: "Human Resources", label: "Human Resources" },
+    { value: "Legal", label: "Legal" },
+  ];
+
+  const handleChange = (e, selected) => {
+    if (selected === "states") {
+      setState(e.value);
+    }
+    if (selected === "department") {
+      setDepartment(e.value);
+    }
+  };
+
   const saveEmployee = (e) => {
     e.preventDefault();
     const employee = {
@@ -80,17 +102,13 @@ const Main = () => {
             />
 
             <label htmlFor="state">State</label>
-            <select
-              name="state"
-              id="state"
-              onChange={(e) => setState(e.target.value)}
-            >
-              {states.map((state, index) => (
-                <option key={index} value={state.name}>
-                  {state.name}
-                </option>
-              ))}
-            </select>
+            <Select
+              defaultValue={optionsForStates[0]}
+              className="select"
+              name="states"
+              options={optionsForStates}
+              onChange={(e) => handleChange(e, "states")}
+            />
 
             <label htmlFor="zip-code">Zip Code</label>
             <input
@@ -100,7 +118,7 @@ const Main = () => {
             />
           </fieldset>
 
-          <label htmlFor="department">Department</label>
+          {/* <label htmlFor="department">Department</label>
           <select
             name="department"
             id="department"
@@ -111,7 +129,15 @@ const Main = () => {
             <option value="Engineering">Engineering</option>
             <option value="Human Resources">Human Resources</option>
             <option value="Legal">Legal</option>
-          </select>
+          </select> */}
+          <label htmlFor="department">Department</label>
+          <Select
+            defaultValue={optionsForDepartment[0]}
+            className="select"
+            name="department"
+            options={optionsForDepartment}
+            onChange={(e) => handleChange(e, "department")}
+          />
           <input type="submit" value="Save" className="btnSubmit" />
         </form>
       </div>
