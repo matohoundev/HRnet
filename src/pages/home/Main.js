@@ -3,13 +3,16 @@ import { useDispatch } from "react-redux";
 import { states } from "../../data/states";
 import { addEmployee } from "../../redux/actions/employeeActions";
 import Select from "react-select";
+import Calendar from "rc-calendar";
+import Moment from "moment";
 
 const Main = () => {
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-  const [startDate, setStartDate] = useState("");
+  const [startDate, setStartDate] = useState(Moment());
+  const [showTime, setShowTime] = useState(false);
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState(states[0].name);
@@ -78,10 +81,13 @@ const Main = () => {
           />
 
           <label htmlFor="start-date">Start Date</label>
-          <input
-            type="text"
-            id="start-date"
-            onChange={(e) => setStartDate(e.target.value)}
+          <Calendar
+            CalendarMixinWrapper={startDate}
+            showDateInput={state.showTime}
+            onChange={(value) => {
+              setShowTime(!showTime);
+              setStartDate(value.toISOString());
+            }}
           />
 
           <fieldset className="address">
