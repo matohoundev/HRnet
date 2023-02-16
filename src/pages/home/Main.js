@@ -7,6 +7,8 @@ import { addEmployee } from "../../redux/actions/employeeActions";
 // plugins
 import Select from "react-select";
 import Modal from "react-modal";
+// style
+import { customStylesModal } from "../../style/modules/modal";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -50,23 +52,11 @@ const Main = () => {
     setModalOpen(!modalOpen);
   };
 
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-    overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.75)",
-    },
-  };
-
   const saveEmployee = (e) => {
     e.preventDefault();
+    const employees = JSON.parse(localStorage.getItem("employees")) || [];
     const employee = {
+      key: employees.length + 1,
       firstName,
       lastName,
       dateOfBirth,
@@ -78,15 +68,13 @@ const Main = () => {
       department,
     };
     dispatch(addEmployee(employee));
-
-    const employees = JSON.parse(localStorage.getItem("employees")) || [];
     employees.push(employee);
     localStorage.setItem("employees", JSON.stringify(employees));
   };
   return (
     <main>
       <div className="container">
-        <h2>Create Employee</h2>
+        <h1>Create Employee</h1>
         <form id="create-employee" onSubmit={saveEmployee}>
           <label htmlFor="first-name">First Name</label>
           <input
@@ -165,9 +153,10 @@ const Main = () => {
         </form>
       </div>
       <Modal
+        ariaHideApp={false}
         isOpen={modalOpen}
         onRequestClose={handleOpenModal}
-        style={customStyles}
+        style={customStylesModal}
         contentLabel="Modal save employee"
       >
         <p>Employee Created !</p>

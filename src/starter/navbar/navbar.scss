@@ -10,10 +10,11 @@ nav {
     display: flex;
     column-gap: 5rem;
     a {
-      color: #004be2;
+      font-weight: bold;
+      color: #2c3e50;
       font-size: 1.15rem;
       &:hover {
-        color: #0b3c9c;
+        color: #276cb1;
       }
     }
   }
