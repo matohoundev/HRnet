@@ -11,6 +11,11 @@ const employeeReducer = (state = initialState, action) => {
         ...state,
         employees: [...state.employees, action.payload],
       };
+    case "GET_EMPLOYEES_FROM_LOCAL_STORAGE":
+      return {
+        ...state,
+        employees: action.payload,
+      };
     default:
       return state;
   }

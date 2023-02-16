@@ -4,3 +4,10 @@ export const addEmployee = (employee) => {
     payload: employee,
   };
 };
+
+export const getEmployeesFromLocalStorage = () => {
+  return {
+    type: "GET_EMPLOYEES_FROM_LOCAL_STORAGE",
+    payload: JSON.parse(localStorage.getItem("employees")) || [],
+  };
+};

@@ -78,6 +78,10 @@ const Main = () => {
       department,
     };
     dispatch(addEmployee(employee));
+
+    const employees = JSON.parse(localStorage.getItem("employees")) || [];
+    employees.push(employee);
+    localStorage.setItem("employees", JSON.stringify(employees));
   };
   return (
     <main>
@@ -147,19 +151,6 @@ const Main = () => {
               onChange={(e) => setZipCode(e.target.value)}
             />
           </fieldset>
-
-          {/* <label htmlFor="department">Department</label>
-          <select
-            name="department"
-            id="department"
-            onChange={(e) => setDepartment(e.target.value)}
-          >
-            <option value="Sales">Sales</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Human Resources">Human Resources</option>
-            <option value="Legal">Legal</option>
-          </select> */}
           <label htmlFor="department">Department</label>
           <Select
             defaultValue={optionsForDepartment[0]}

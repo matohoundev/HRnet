@@ -1,42 +1,69 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Table } from "antd";
+import { getEmployeesFromLocalStorage } from "../../redux/actions/employeeActions";
 
 const EmployeeList = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getEmployeesFromLocalStorage());
+  }, [dispatch]);
+
   const employees = useSelector((state) => state.employees.employees);
+
+  const columns = [
+    {
+      title: "First Name",
+      dataIndex: "firstName",
+      key: "firstName",
+    },
+    {
+      title: "Last Name",
+      dataIndex: "lastName",
+      key: "lastName",
+    },
+    {
+      title: "Start Date",
+      dataIndex: "startDate",
+      key: "startDate",
+    },
+    {
+      title: "Department",
+      dataIndex: "department",
+      key: "department",
+    },
+    {
+      title: "Date of Birth",
+      dataIndex: "dateOfBirth",
+      key: "dateOfBirth",
+    },
+    {
+      title: "Street",
+      dataIndex: "street",
+      key: "street",
+    },
+    {
+      title: "City",
+      dataIndex: "city",
+      key: "city",
+    },
+    {
+      title: "State",
+      dataIndex: "state",
+      key: "state",
+    },
+    {
+      title: "Zip Code",
+      dataIndex: "zipCode",
+      key: "zipCode",
+    },
+  ];
 
   return (
     <div id="employee-div" className="container">
       <h1>Current Employees</h1>
-      <table id="employee-table">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Start Date</th>
-            <th>Department</th>
-            <th>Date of Birth</th>
-            <th>Street</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip Code</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((employee, index) => (
-            <tr key={index}>
-              <td>{employee.firstName}</td>
-              <td>{employee.lastName}</td>
-              <td>{employee.startDate}</td>
-              <td>{employee.department}</td>
-              <td>{employee.dateOfBirth}</td>
-              <td>{employee.street}</td>
-              <td>{employee.city}</td>
-              <td>{employee.state}</td>
-              <td>{employee.zipCode}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table columns={columns} dataSource={employees} />
     </div>
   );
 };
