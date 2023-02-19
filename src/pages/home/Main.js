@@ -6,7 +6,7 @@ import { states } from "../../data/states";
 import { addEmployee } from "../../redux/actions/employeeActions";
 // plugins
 import Select from "react-select";
-import Modal from "../../components/modal";
+import { Modal } from "react-modal-oc";
 
 const Main = () => {
   const dispatch = useDispatch();
