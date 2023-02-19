@@ -6,9 +6,7 @@ import { states } from "../../data/states";
 import { addEmployee } from "../../redux/actions/employeeActions";
 // plugins
 import Select from "react-select";
-import Modal from "react-modal";
-// style
-import { customStylesModal } from "../../style/modules/modal";
+import { Modal } from "react-modal-oc";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -152,13 +150,7 @@ const Main = () => {
           </button>
         </form>
       </div>
-      <Modal
-        ariaHideApp={false}
-        isOpen={modalOpen}
-        onRequestClose={handleOpenModal}
-        style={customStylesModal}
-        contentLabel="Modal save employee"
-      >
+      <Modal isOpen={modalOpen} onRequestClose={handleOpenModal}>
         <p>Employee Created !</p>
       </Modal>
     </main>
