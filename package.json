@@ -10,6 +10,7 @@
     "antd": "^5.2.1",
     "node-sass": "^8.0.0",
     "react": "^18.2.0",
+    "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
     "react-modal-oc": "^1.1.1",
     "react-redux": "^8.0.5",

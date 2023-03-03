@@ -7,17 +7,18 @@ import { addEmployee } from "../../redux/actions/employeeActions";
 // plugins
 import Select from "react-select";
 import { Modal } from "react-modal-oc";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Main = () => {
   const dispatch = useDispatch();
 
-  const dateOfDay = new Date().toISOString().slice(0, 10);
   const [modalOpen, setModalOpen] = useState(false);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [startDate, setStartDate] = useState(dateOfDay);
+  const [dateOfBirth, setDateOfBirth] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState(states[0].name);
@@ -89,19 +90,15 @@ const Main = () => {
           />
 
           <label htmlFor="date-of-birth">Date of Birth</label>
-          <input
-            type="date"
-            id="date-of-birth"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
+          <DatePicker
+            selected={dateOfBirth}
+            onChange={(date) => setDateOfBirth(date)}
           />
 
           <label htmlFor="start-date">Start Date</label>
-          <input
-            type="date"
-            id="start-date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
           />
 
           <fieldset className="address">
